@@ -7,11 +7,32 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee extends Person{
+	/**
+	 * 
+	 */
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param id
+	 * @param profession
+	 * @param salario
+	 */
+	public Employee(long id, String profession, Integer salario) {
+		super();
+		this.id = id;
+		this.profession = profession;
+		this.salario = salario;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String profession;
 	private Integer salario;
+	
 
 	public void getSalario(Integer salario){
 		this.salario = salario;

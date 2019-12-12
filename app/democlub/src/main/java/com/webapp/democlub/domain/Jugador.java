@@ -9,14 +9,14 @@ import javax.persistence.Id;
 public class Jugador extends Employee{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String hability;
+	private Integer hability;
 	private Integer trophies_number;
-	
-	public String getHability() {
+	private String position;
+	public Integer getHability() {
 		return hability;
 	}
 
-	public void setHability(String hability) {
+	public void setHability(Integer hability) {
 		this.hability = hability;
 	}
 	public Integer getTrophies() {
@@ -31,6 +31,14 @@ public class Jugador extends Employee{
 	@Override
 	public String toString() {
 		return "Trophies number: " + trophies_number + " Hability: " + hability;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	

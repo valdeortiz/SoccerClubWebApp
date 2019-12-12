@@ -10,6 +10,17 @@ import javax.persistence.Id;
 */
 @Entity
 public class Directivo extends Person{
+	/**
+	 * @param id
+	 * @param salario
+	 */
+	public Directivo(long id, Integer salario) {
+		super();
+		this.id = id;
+		this.salario = salario;
+	}
+
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

@@ -27,7 +27,7 @@ public class DirectivoService {
 	
 	
 	public Directivo findById(Long id) {
-		Directivo directivo = new Directivo();
+		Directivo directivo = new Directivo(id, null);
 		return directivo;
 	}
 	

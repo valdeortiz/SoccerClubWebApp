@@ -18,7 +18,7 @@ public class TeamService {
 	
 	
 	public Team findById(Long id) {
-		Team team = new Team();
+		Team team = new Team(id, null, null);
 		return team;
 	}
 

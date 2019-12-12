@@ -7,6 +7,16 @@ import javax.persistence.Id;
 
 @Entity
 public class Dt extends Jugador{
+	/**
+	 * @param id
+	 * @param salario
+	 */
+	public Dt(long id, Integer salario) {
+		super();
+		this.id = id;
+		this.salario = salario;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;

@@ -8,6 +8,26 @@ import javax.persistence.Entity;
 @Entity
 public class Person {
 
+	/**
+	 * @param firstName
+	 * @param id
+	 * @param lastName
+	 */
+	public Person(String firstName, long id, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.id = id;
+		this.lastName = lastName;
+	}
+
+	/**
+	 * 
+	 */
+	public Person() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private String firstName;
 
 	@Id

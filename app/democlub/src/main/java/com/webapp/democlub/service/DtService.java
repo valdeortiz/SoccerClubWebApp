@@ -18,7 +18,7 @@ public class DtService {
 	
 	
 	public Dt findById(Long id) {
-		Dt dt = new Dt();
+		Dt dt = new Dt(id, null);
 		return dt;
 	}
 
