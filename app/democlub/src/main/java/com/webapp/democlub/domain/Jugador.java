@@ -9,9 +9,19 @@ import javax.persistence.Id;
 public class Jugador extends Employee{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer hability;
+	private Integer hability; /* 0 - 100% */
 	private Integer trophies_number;
 	private String position;
+	private Integer average_salary;
+
+	public Integer getAverageSalary() {
+		return average_salary;
+	}
+
+	public void setAverageSalary(Integer average_salary) {
+		this.average_salary = average_salary;
+	}
+
 	public Integer getHability() {
 		return hability;
 	}

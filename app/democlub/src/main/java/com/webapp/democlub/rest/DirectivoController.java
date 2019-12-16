@@ -14,7 +14,8 @@ import com.webapp.democlub.service.DirectivoService;
 
 /*
 * Creamos nuestro controlador rest que mapea las direcciones para poder utilizar las funciones del service
-*
+* colocamos la direccion donde nuestro cliente se va a conectar a nuestro api
+* e implementamos los metodos crud.
 */
 
 @RestController

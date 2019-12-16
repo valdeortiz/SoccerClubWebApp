@@ -25,15 +25,15 @@ public class DirectivoService {
 	@Autowired
 	private DirectivoRepository directivoRepository;
 	
-	
+	/*Buscamos un directivo segun su id  */ 
 	public Directivo findById(Long id) {
 		Directivo directivo = new Directivo(id, null);
 		return directivo;
 	}
-	
+	/*Funcion para la inscripcion segun el tipo de Empleado o equipo*/
 	public void save(Directivo directivo) {
 	}
-
+	/*Borrar alguno equipo o empleado */
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 

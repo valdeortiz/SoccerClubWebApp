@@ -1,0 +1,16 @@
+-- Estructura basica de la app.
+
+La app esta pensada en manager de jugadores para la posibilidad de transferencias y analisis de jugadores y torneos.
+Se implementa CRUD con json como metodo de tranferencia de datos atraves de Rest.
+
+Para consultar el modo de instalacion y las tecnologias utilizadas leer el README.md
+
+-OBS:
+La app puede sufrir modificaciones.
+
+-Creditos:
+El proyecto esta basado en gran parte por el repositorio tp-2017 que se encuentra en github.com/alefq/lp3-2019
+
+-Creadores:
+Valdemar Ortiz.
+Marcelo Baez.

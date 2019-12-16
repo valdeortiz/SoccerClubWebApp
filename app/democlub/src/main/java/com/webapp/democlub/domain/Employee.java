@@ -10,9 +10,16 @@ public class Employee extends Person{
 	/**
 	 * 
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	private String profession;
+	private Integer salario;
+	private Integer net_salary;
+	private Integer average_salary;
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor 
 	}
 
 	/**
@@ -27,12 +34,19 @@ public class Employee extends Person{
 		this.salario = salario;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private String profession;
-	private Integer salario;
+	public Integer getAverageSalary() {
+		return average_salary;
+	}
+
+	public void setAverageSalary(Integer average_salary) {
+		this.average_salary = average_salary;
+	}
 	
+	public Integer impuestoCalc(){
+		// calculamos el monto de impuestos de cada empleado.
+		// y retornamos el salario neto
+		return this.net_salary;
+	}
 
 	public void getSalario(Integer salario){
 		this.salario = salario;
@@ -61,7 +75,7 @@ public class Employee extends Person{
 
 	@Override
 	public String toString() {
-		return "salario del directivo: " + salario;
+		return "Name: empleado" ;
 	}
 
 	
