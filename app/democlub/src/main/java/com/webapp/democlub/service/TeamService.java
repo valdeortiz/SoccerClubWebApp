@@ -18,23 +18,27 @@ public class TeamService {
 	
 	
 	public Team findById(Long id) {
-		Team team = new Team(id, null, null);
+		Team team = teamRepository.findById(id).orElse(null);
 		return team;
 	}
 
 	
 	public List<Team> findAll() {
 		List<Team> teams = new ArrayList<>();
+		Iterator<Team> iteratorTeams = teamRepository.findAll().iterator();
+		while (iteratorTeams.hasNext()) {
+			teams.add(iteratorTeams.next());
+		}
 		return teams;
 	}
 
 	
 	public void save(Team team) {
+		teamRepository.save(team);
 	}
 
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		teamRepository.deleteById(id);
 	}
 
 }

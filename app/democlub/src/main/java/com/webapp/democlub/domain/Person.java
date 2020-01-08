@@ -8,33 +8,13 @@ import javax.persistence.Entity;
 @Entity
 public class Person {
 
-	/**
-	 * @param firstName
-	 * @param id
-	 * @param lastName
-	 */
-	public Person(String firstName, long id, String lastName) {
-		super();
-		this.firstName = firstName;
-		this.id = id;
-		this.lastName = lastName;
-	}
-
-	/**
-	 * 
-	 */
-	public Person() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	private String firstName;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	private String firstName;
 	private String lastName;
-
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,11 +37,6 @@ public class Person {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	
-	@Override
-	public String toString() {
-		return "Name: " + firstName + " " + lastName;
 	}
 	
 }

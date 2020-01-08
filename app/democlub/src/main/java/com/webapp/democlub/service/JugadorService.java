@@ -18,23 +18,27 @@ public class JugadorService {
 	
 	
 	public Jugador findById(Long id) {
-		Jugador jugador = new Jugador();
+		Jugador jugador = jugadorRepository.findById(id).orElse(null);
 		return jugador;
 	}
 
 	
 	public List<Jugador> findAll() {
 		List<Jugador> jugadors = new ArrayList<>();
+		Iterator<Jugador> iteratorJugadors = jugadorRepository.findAll().iterator();
+		while (iteratorJugadors.hasNext()) {
+			jugadors.add(iteratorJugadors.next());
+		}
 		return jugadors ;
 	}
 
 	
 	public void save(Jugador jugador) {
+		jugadorRepository.save(jugador);
 	}
 
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		jugadorRepository.deleteById(id);
 	}
 
 }

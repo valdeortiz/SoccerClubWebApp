@@ -7,25 +7,16 @@ import javax.persistence.Id;
 
 @Entity
 public class Team{
-	/**
-	 * @param id
-	 * @param division
-	 * @param name
-	 */
-	public Team(long id, String division, String name) {
-		super();
-		this.id = id;
-		this.division = division;
-		this.name = name;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	private String division;
 	private String name;
-	private Integer salary_prom;
-
+	private Integer salary_prom;	
+	
 	public void setName(String name){
 		this.name = name;
 	}
@@ -49,11 +40,6 @@ public class Team{
 	
 	public long getId(){
 		return id;
-	}
-
-	@Override
-	public String toString() {
-		return "Team: " + name;
 	}
 
 	public Integer getSalary_prom() {

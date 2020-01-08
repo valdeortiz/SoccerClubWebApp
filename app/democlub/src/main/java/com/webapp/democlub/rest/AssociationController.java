@@ -1,6 +1,5 @@
 package com.webapp.democlub.rest;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,7 @@ import com.webapp.democlub.service.AssociationService;
 @RestController
 @RequestMapping("/association")
 public class AssociationController {
-    // Creamos un objero de tipo Asso.Service donde tenemos la implemetacion de cada metodo
+    // Creamos un objero de tipo Asso.Service donde tenemos la logica de cada metodo
 	@Autowired
 	private AssociationService associationService;
     // buscamos un objeto segun su id.

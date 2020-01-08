@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 public class DemoclubApplication {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(DemoclubApplication.class, args);
 	}
 

@@ -7,33 +7,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee extends Person{
-	/**
-	 * 
-	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	private String profession;
 	private Integer salario;
 	private Integer net_salary;
 	private Integer average_salary;
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor 
-	}
-
-	/**
-	 * @param id
-	 * @param profession
-	 * @param salario
-	 */
-	public Employee(long id, String profession, Integer salario) {
-		super();
-		this.id = id;
-		this.profession = profession;
-		this.salario = salario;
-	}
-
+	
+	
 	public Integer getAverageSalary() {
 		return average_salary;
 	}
@@ -72,11 +56,5 @@ public class Employee extends Person{
 	public long getId(){
 		return id;
 	}
-
-	@Override
-	public String toString() {
-		return "Name: empleado" ;
-	}
-
 	
 }

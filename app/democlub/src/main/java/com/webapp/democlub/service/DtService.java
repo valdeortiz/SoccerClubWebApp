@@ -18,23 +18,28 @@ public class DtService {
 	
 	
 	public Dt findById(Long id) {
-		Dt dt = new Dt(id, null);
+		Dt dt = dtRepository.findById(id).orElse(null);
 		return dt;
+
 	}
 
 	
 	public List<Dt> findAll() {
 		List<Dt> dts = new ArrayList<>();
+		Iterator<Dt> iteratorDts = dtRepository.findAll().iterator();
+		while (iteratorDts.hasNext()) {
+			dts.add(iteratorDts.next());
+		}
 		return dts ;
 	}
 
 	
 	public void save(Dt dt) {
+		dtRepository.save(dt);
 	}
 
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		dtRepository.deleteById(id);
 	}
 
 }

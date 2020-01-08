@@ -18,23 +18,27 @@ public class EmployeeService {
 	
 	
 	public Employee findById(Long id) {
-		Employee employee = new Employee();
+		Employee employee = employeeRepository.findById(id).orElse(null);
 		return employee;
 	}
 
 	
 	public List<Employee> findAll() {
 		List<Employee> employees = new ArrayList<>();
+		Iterator<Employee> iteratorEmployees = employeeRepository.findAll().iterator();
+		while (iteratorEmployees.hasNext()) {
+			employees.add(iteratorEmployees.next());
+		}
 		return employees ;
 	}
 
 	
 	public void save(Employee employee) {
+		employeeRepository.save(employee);
 	}
 
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-
+		employeeRepository.deleteById(id);
 	}
 
 }

@@ -9,4 +9,5 @@ import com.webapp.democlub.domain.Directivo;
 /*Importamos paginAndSorting para poder usar los servicios crud en nuestro service/controller */
 @RepositoryRestResource(collectionResourceRel = "directivo", path = "directivo")
 public interface DirectivoRepository extends PagingAndSortingRepository<Directivo, Long> {
+	List<Directivo> findByName(String name);
 }
