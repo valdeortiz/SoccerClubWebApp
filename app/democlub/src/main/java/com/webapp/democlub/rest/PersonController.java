@@ -29,7 +29,7 @@ public class PersonController {
     public List<Person> list() {
         return personService.findAll();
     }
-
+    
     @RequestMapping(method = RequestMethod.POST)
     public void add(@RequestBody Person person) {
     	personService.save(person);

@@ -10,7 +10,7 @@ public class Employee extends Person{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String profession;
 	private Integer salario;
@@ -48,13 +48,13 @@ public class Employee extends Person{
 		return profession;
 	}
 
-	
-	public void getId(long id){
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public long getId(){
-		return id;
-	}
 	
 }

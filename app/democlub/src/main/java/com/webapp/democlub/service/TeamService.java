@@ -15,8 +15,7 @@ public class TeamService {
 
 	@Autowired
 	private TeamRepository teamRepository;
-	
-	
+		
 	public Team findById(Long id) {
 		Team team = teamRepository.findById(id).orElse(null);
 		return team;
@@ -31,7 +30,6 @@ public class TeamService {
 		}
 		return teams;
 	}
-
 	
 	public void save(Team team) {
 		teamRepository.save(team);

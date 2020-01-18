@@ -1,29 +1,29 @@
 package com.webapp.democlub.domain;
 
 import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-/*
-* Modelamos cada uno de nuestros objetos a ser utilizado.
-*
-*/
-
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Directivo extends Employee{
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
-	private String profession = "directivo";
+	//private String profession = "directivo";
 	
-	public void setProfession() {
-		// TODO Auto-generated method stub
-		super.setProfession(profession);
+
+	public Long getId() {
+		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 		
 	
 }

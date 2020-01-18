@@ -1,6 +1,10 @@
 package com.webapp.democlub.service;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,16 +26,25 @@ public class DirectivoService {
 	@Autowired
 	private DirectivoRepository directivoRepository;
 	
-	/*Buscamos un directivo segun su id  */ 
+	public List<Directivo> findAll(){
+		List<Directivo> directivos = new ArrayList<>();
+		Iterator<Directivo> directivoIt = directivoRepository.findAll().iterator();
+		while(directivoIt.hasNext()) {
+			directivos.add(directivoIt.next());
+		}
+		return directivos;
+	}
+	
+	 
 	public Directivo findById(Long id) {
 		Directivo directivo = directivoRepository.findById(id).orElse(null);
 		return directivo;
 	}
-	/*Funcion para la inscripcion segun el tipo de Empleado o equipo*/
+	
 	public void save(Directivo directivo) {
 		directivoRepository.save(directivo);
 	}
-	/*Borrar alguno equipo o empleado */
+	
 	public void delete(Long id) {
 		directivoRepository.deleteById(id);
 	}

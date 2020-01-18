@@ -15,8 +15,7 @@ public class JugadorService {
 
 	@Autowired
 	private JugadorRepository jugadorRepository;
-	
-	
+		
 	public Jugador findById(Long id) {
 		Jugador jugador = jugadorRepository.findById(id).orElse(null);
 		return jugador;
@@ -31,7 +30,6 @@ public class JugadorService {
 		}
 		return jugadors ;
 	}
-
 	
 	public void save(Jugador jugador) {
 		jugadorRepository.save(jugador);

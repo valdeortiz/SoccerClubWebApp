@@ -16,13 +16,10 @@ public class DtService {
 	@Autowired
 	private DtRepository dtRepository;
 	
-	
 	public Dt findById(Long id) {
 		Dt dt = dtRepository.findById(id).orElse(null);
 		return dt;
-
 	}
-
 	
 	public List<Dt> findAll() {
 		List<Dt> dts = new ArrayList<>();
@@ -32,7 +29,6 @@ public class DtService {
 		}
 		return dts ;
 	}
-
 	
 	public void save(Dt dt) {
 		dtRepository.save(dt);

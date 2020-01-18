@@ -15,8 +15,7 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-	
+		
 	public Employee findById(Long id) {
 		Employee employee = employeeRepository.findById(id).orElse(null);
 		return employee;
@@ -31,7 +30,6 @@ public class EmployeeService {
 		}
 		return employees ;
 	}
-
 	
 	public void save(Employee employee) {
 		employeeRepository.save(employee);

@@ -1,6 +1,10 @@
 package com.webapp.democlub.service;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +18,29 @@ public class AssociationService {
 	@Autowired /*Esto significa que vamos a inyectar*/
 	private AssociationRepository associationRepository;
 	
-	/*Buscamos un association segun su id  */ 
+	
+	public List<Association> findAll(){
+		List<Association> associations = new ArrayList<>();
+		Iterator<Association> associationIt = associationRepository.findAll().iterator();
+		while(associationIt.hasNext()) {
+			associations.add(associationIt.next());
+		}
+		return associations;
+	}
+ 
 	public Association findById(Long id) {
 		Association association = associationRepository.findById(id).orElse(null);
 		return association;
 	}
-	/*Funcion para la inscripcion segun el tipo de Empleado o equipo*/
+
 	public void save(Association association) {
 		associationRepository.save(association);
 	}
-	/*Borrar algun equipo o empleado segun su id generado dinamicamente en el entity*/
+	
 	public void delete(Long id) {
 		associationRepository.deleteById(id);
 	}
+	
+	
 
 }

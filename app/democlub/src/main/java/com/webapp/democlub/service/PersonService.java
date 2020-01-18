@@ -15,14 +15,11 @@ public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
-	
-	
+		
 	public Person findById(Long id) {
 		Person person = personRepository.findById(id).orElse(null);
 		return person;
 	}
-
-	
 	public List<Person> findAll() {
 		List<Person> persons = new ArrayList<>();
 		Iterator<Person> iteratorPersons = personRepository.findAll().iterator();
@@ -31,7 +28,6 @@ public class PersonService {
 		}
 		return persons ;
 	}
-
 	
 	public void save(Person person) {
 		personRepository.save(person);

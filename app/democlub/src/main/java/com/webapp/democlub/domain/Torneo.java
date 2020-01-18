@@ -10,7 +10,7 @@ public class Torneo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String name;
 	private String type;
@@ -30,6 +30,16 @@ public class Torneo {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 
 }
  

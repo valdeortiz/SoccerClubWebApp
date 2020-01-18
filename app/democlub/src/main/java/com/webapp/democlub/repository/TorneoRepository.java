@@ -3,8 +3,8 @@ package com.webapp.democlub.repository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.webapp.democlub.domain.Team;
+import com.webapp.democlub.domain.Torneo;
 
-@RepositoryRestResource(collectionResourceRel = "tournament", path = "tournament")
-public interface TorneoRepository extends PagingAndSortingRepository<Team, Long> {
+@RepositoryRestResource(collectionResourceRel = "torneo", path = "torneo")
+public interface TorneoRepository extends PagingAndSortingRepository<Torneo, Long> {
 }

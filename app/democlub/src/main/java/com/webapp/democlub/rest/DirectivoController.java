@@ -1,6 +1,8 @@
 package com.webapp.democlub.rest;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,9 @@ public class DirectivoController {
 	@Autowired
 	private DirectivoService directivoService;
 
+	public List<Directivo> findAll(){
+		return directivoService.findAll();
+	}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Directivo greetings(@PathVariable("id") Long id) {
         Directivo directivo = directivoService.findById(id);
