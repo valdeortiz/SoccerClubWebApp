@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Dt extends Jugador{
+public class Dt extends Player{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -9,39 +9,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webapp.democlub.domain.Jugador;
-import com.webapp.democlub.service.JugadorService;
+import com.webapp.democlub.domain.Player;
+import com.webapp.democlub.service.PlayerService;
 
 @RestController
-@RequestMapping("/jugador")
-public class JugadorController {
+@RequestMapping("/player")
+public class PlayerController {
 
 	@Autowired
-	private JugadorService jugadorService;
+	private PlayerService playerService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Jugador greetings(@PathVariable("id") Long id) {
-        Jugador jugador = jugadorService.findById(id);
-        return jugador;
+    public Player greetings(@PathVariable("id") Long id) {
+        Player player = playerService.findById(id);
+        return player;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Jugador> list() {
-        return jugadorService.findAll();
+    public List<Player> list() {
+        return playerService.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST) 
-    public void add(@RequestBody Jugador jugador) {
-    	jugadorService.save(jugador);
+    public void add(@RequestBody Player player) {
+    	playerService.save(player);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
-    	jugadorService.delete(id);
+    	playerService.delete(id);
     }
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteAll() {
-    	jugadorService.deleteAll();
+    	playerService.deleteAll();
     }
     
 

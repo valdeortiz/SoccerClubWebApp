@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Directivo extends Employee{
+public class Executive extends Employee{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

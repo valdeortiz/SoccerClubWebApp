@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.webapp.democlub.domain.Directivo;
-import com.webapp.democlub.service.DirectivoService;
+import com.webapp.democlub.domain.Executive;
+import com.webapp.democlub.service.ExecutiveService;
 
 /*
 * Creamos nuestro controlador rest que mapea las direcciones para poder utilizar las funciones del service
@@ -20,29 +20,29 @@ import com.webapp.democlub.service.DirectivoService;
 */
 
 @RestController
-@RequestMapping("/directivo")
-public class DirectivoController {
+@RequestMapping("/executive")
+public class ExecutiveController {
 
 	@Autowired
-	private DirectivoService directivoService;
+	private ExecutiveService executiveService;
 
-	public List<Directivo> findAll(){
-		return directivoService.findAll();
+	public List<Executive> findAll(){
+		return executiveService.findAll();
 	}
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Directivo greetings(@PathVariable("id") Long id) {
-        Directivo directivo = directivoService.findById(id);
-        return directivo;
+    public Executive greetings(@PathVariable("id") Long id) {
+        Executive executive = executiveService.findById(id);
+        return executive;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void add(@RequestBody Directivo directivo) {
-    	directivoService.save(directivo);
+    public void add(@RequestBody Executive executive) {
+    	executiveService.save(executive);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
-    	directivoService.delete(id);
+    	executiveService.delete(id);
     }
 
 }

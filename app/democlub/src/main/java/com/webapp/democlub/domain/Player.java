@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Jugador extends Employee{
+public class Player extends Employee{
 	
 
 	@Id
@@ -38,7 +38,11 @@ public class Jugador extends Employee{
 	}
 	
 	public String getTeam() {
-		return team.getName();
+		if(team != null) {
+			return team.getName();
+		}else {
+			return "not team";
+		}
 	}
 	public void setTeam(Team team) {
 		this.team = team;

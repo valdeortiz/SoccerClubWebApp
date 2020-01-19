@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Team{
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -23,27 +22,39 @@ public class Team{
 	private Integer salary_prom;
 	
 	@OneToMany(mappedBy="team",cascade = CascadeType.ALL)
-	private List<Jugador> jugadores;
+	private List<Player> players;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "tournament_id")
+//	private Tournament tournament;
 	
 	public Team() {
-		jugadores = new ArrayList<>();
+		players = new ArrayList<>();
+	}	
+	
+//	public String getTournament() {
+//		return tournament.getName();
+//	}
+//
+//	public void setTournament(Tournament tournament) {
+//		this.tournament = tournament;
+//	}
+
+	public void addPlayer(Player player) {
+		if (!players.contains(player)) {
+			players.add(player);
+			player.setTeam(this);
+		}	
 	}
-	public void addJugador(Jugador jugador) {
-		if (!jugadores.contains(jugador)) {
-			jugadores.add(jugador);
-			jugador.setTeam(this);
-		}
-		
-	}
-	public List<Jugador> getJugadores() {
-		return jugadores;
+	public List<Player> getPlayers() {
+		return players;
 	}
 	
-	public void setJugadores(List<Jugador> jugadores) {
-		for(Jugador i : jugadores) {
-			addJugador(i);
+	public void setPlayers(List<Player> players) {
+		for(Player i : players) {
+			addPlayer(i);
 		}
-		this.jugadores = jugadores;
+		this.players = players;
 	}
 
 	public void setName(String name){
