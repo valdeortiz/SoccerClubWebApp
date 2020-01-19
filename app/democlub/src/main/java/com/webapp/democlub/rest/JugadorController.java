@@ -39,5 +39,10 @@ public class JugadorController {
     public void delete(@PathVariable("id") Long id) {
     	jugadorService.delete(id);
     }
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void deleteAll() {
+    	jugadorService.deleteAll();
+    }
+    
 
 }

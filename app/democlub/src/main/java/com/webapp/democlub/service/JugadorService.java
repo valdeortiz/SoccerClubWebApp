@@ -38,5 +38,8 @@ public class JugadorService {
 	public void delete(Long id) {
 		jugadorRepository.deleteById(id);
 	}
+	public void deleteAll() {
+		jugadorRepository.deleteAll();
+	}
 
 }

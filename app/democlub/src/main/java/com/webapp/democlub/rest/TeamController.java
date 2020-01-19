@@ -39,5 +39,9 @@ public class TeamController {
     public void delete(@PathVariable("id") Long id) {
     	teamService.delete(id);
     }
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void deleteAll() {
+    	teamService.deleteAll();
+    	}
 
 }

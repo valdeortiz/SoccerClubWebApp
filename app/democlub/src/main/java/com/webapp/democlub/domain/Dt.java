@@ -12,7 +12,18 @@ public class Dt extends Jugador{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
+	
+	@Override
+	public void setProfession(String profession) {
+		profession = "dt";
+		super.setProfession(profession);
+	}
+	@Override
+	public String getProfession() {
+		// TODO Auto-generated method stub
+		return "Dt";
+	}
+	
 	public Long getId() {
 		return id;
 	}

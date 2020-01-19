@@ -1,9 +1,14 @@
 package com.webapp.democlub.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Team{
@@ -15,8 +20,32 @@ public class Team{
 	
 	private String division;
 	private String name;
-	private Integer salary_prom;	
+	private Integer salary_prom;
 	
+	@OneToMany(mappedBy="team",cascade = CascadeType.ALL)
+	private List<Jugador> jugadores;
+	
+	public Team() {
+		jugadores = new ArrayList<>();
+	}
+	public void addJugador(Jugador jugador) {
+		if (!jugadores.contains(jugador)) {
+			jugadores.add(jugador);
+			jugador.setTeam(this);
+		}
+		
+	}
+	public List<Jugador> getJugadores() {
+		return jugadores;
+	}
+	
+	public void setJugadores(List<Jugador> jugadores) {
+		for(Jugador i : jugadores) {
+			addJugador(i);
+		}
+		this.jugadores = jugadores;
+	}
+
 	public void setName(String name){
 		this.name = name;
 	}

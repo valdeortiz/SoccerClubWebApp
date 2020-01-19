@@ -17,15 +17,15 @@ public class Employee extends Person{
 	private Integer net_salary;
 	private Integer average_salary;
 	
-	
-	public Integer getAverageSalary() {
+
+	public Integer getAverage_salary() {
 		return average_salary;
 	}
 
-	public void setAverageSalary(Integer average_salary) {
+	public void setAverage_salary(Integer average_salary) {
 		this.average_salary = average_salary;
 	}
-	
+
 	public Integer impuestoCalc(){
 		// calculamos el monto de impuestos de cada empleado.
 		// y retornamos el salario neto

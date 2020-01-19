@@ -12,9 +12,17 @@ public class Directivo extends Employee{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	//private String profession = "directivo";
+	@Override
+	public void setProfession(String profession) {
+		// TODO Auto-generated method stub
+		super.setProfession(profession);
+	}
 	
-
+	@Override
+	public String getProfession() {
+		// TODO Auto-generated method stub
+		return "directivo";
+	}
 	public Long getId() {
 		return id;
 	}
