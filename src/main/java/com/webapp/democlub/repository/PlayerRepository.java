@@ -5,6 +5,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.webapp.democlub.domain.Player;
 
-@RepositoryRestResource(collectionResourceRel = "jugador", path = "jugador")
+@RepositoryRestResource(collectionResourceRel = "player", path = "player")
 public interface PlayerRepository extends PagingAndSortingRepository<Player, Long> {
 }

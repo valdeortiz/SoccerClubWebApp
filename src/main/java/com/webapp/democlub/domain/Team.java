@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,22 +27,27 @@ public class Team{
 	@OneToMany(mappedBy="team",cascade = CascadeType.ALL)
 	private List<Player> players;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "tournament_id")
-//	private Tournament tournament;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "tournament_id")
+	private Tournament tournament;
 	
+	public String getTournament() {
+		if(tournament != null) {
+			return tournament.getName();	
+		}else {
+			return "not tournament";
+		}
+		
+	}
+
+	public void setTournament(Tournament tournament) {
+		this.tournament = tournament;
+	}
+//*********************************************************
 	public Team() {
 		players = new ArrayList<>();
-	}	
+	}
 	
-//	public String getTournament() {
-//		return tournament.getName();
-//	}
-//
-//	public void setTournament(Tournament tournament) {
-//		this.tournament = tournament;
-//	}
-
 	public void addPlayer(Player player) {
 		if (!players.contains(player)) {
 			players.add(player);
