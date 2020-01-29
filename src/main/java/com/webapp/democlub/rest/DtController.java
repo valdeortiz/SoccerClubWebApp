@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webapp.democlub.domain.Dt;
+import com.webapp.democlub.exception.InscripcionException;
 import com.webapp.democlub.service.DtService;
 
 @RestController
@@ -31,13 +32,17 @@ public class DtController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void add(@RequestBody Dt dt) {
+    public void add(@RequestBody Dt dt) throws InscripcionException {
     	dtService.save(dt);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
     	dtService.delete(id);
+    }
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void deleteAll() {
+    	dtService.deleteAll();
     }
 
 }

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Team{
@@ -24,12 +25,31 @@ public class Team{
 	private String name;
 	private Integer salary_prom;
 	
-	@OneToMany(mappedBy="team",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="team",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Player> players;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tournament_id")
 	private Tournament tournament;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="dt_id")
+	private Dt dt;
+		
+	
+	public void setDt(Dt dt) {
+		dt.setTeam(this);
+		this.dt = dt;
+	}
+	
+	public String getDt() {
+		if (dt != null) {
+			return dt.getFirstName();
+		}else {
+			return "no name";
+		}
+		
+	}
 	
 	public String getTournament() {
 		if(tournament != null) {
@@ -48,7 +68,7 @@ public class Team{
 		players = new ArrayList<>();
 	}
 	
-	public void addPlayer(Player player) {
+	private void addPlayer(Player player) {
 		if (!players.contains(player)) {
 			players.add(player);
 			player.setTeam(this);

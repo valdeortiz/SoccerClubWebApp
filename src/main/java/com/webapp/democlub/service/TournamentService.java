@@ -32,6 +32,7 @@ public class TournamentService {
 	}
 	
 	public void save(Tournament tournament) {
+				
 		tournamentRepository.save(tournament);
 	}
 

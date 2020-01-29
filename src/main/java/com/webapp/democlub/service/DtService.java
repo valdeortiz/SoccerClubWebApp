@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webapp.democlub.domain.Dt;
+import com.webapp.democlub.exception.InscripcionException;
 import com.webapp.democlub.repository.DtRepository;
+
 
 @Service
 public class DtService {
@@ -30,12 +32,16 @@ public class DtService {
 		return dts ;
 	}
 	
-	public void save(Dt dt) {
+	public void save(Dt dt) throws InscripcionException{
 		dtRepository.save(dt);
 	}
 
 	public void delete(Long id) {
 		dtRepository.deleteById(id);
 	}
+	public void deleteAll() {
+		dtRepository.deleteAll();
+	}
+	
 
 }

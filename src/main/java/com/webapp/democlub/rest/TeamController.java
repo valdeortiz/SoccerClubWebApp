@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.service.TeamService;
 
+
 @RestController
 @RequestMapping("/team")
 public class TeamController {
 
 	@Autowired
 	private TeamService teamService;
-
+	
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Team greetings(@PathVariable("id") Long id) {
         Team team = teamService.findById(id);
@@ -32,6 +33,14 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void add(@RequestBody Team team) {
+    	//try catch de inscripcion del dt
+//    	try {
+//			teamService.save(team);
+//		} catch (InscripcionException e) {
+//			String email = e.getContacto();
+//			System.out.println("Ocurrió un error al inscribir las empresas: " + e.getMessage());
+//		}
+    	
     	teamService.save(team);
     }
 

@@ -20,7 +20,7 @@ public class Player extends Employee{
 	private Integer hability; /* 0 - 100% */
 	private Integer trophies_number;
 	private String position;
-	private Integer average_salary;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
@@ -69,13 +69,7 @@ public class Player extends Employee{
 		this.position = position;
 	}
 
-	public Integer getAverage_salary() {
-		return average_salary;
-	}
-
-	public void setAverage_salary(Integer average_salary) {
-		this.average_salary = average_salary;
-	}
+	
 	public Long getId() {
 		return id;
 	}

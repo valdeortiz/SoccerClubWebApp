@@ -13,31 +13,33 @@ public class Employee extends Person{
 	private Long id;
 	
 	private String profession;
-	private Integer salario;
-	private Integer net_salary;
-	private Integer average_salary;
+	private Float salary;
+	private Float net_salary;
+	private Float average_salary;
 	
 
-	public Integer getAverage_salary() {
+	public Float getAverage_salary() {
+		average_salary = salary / 12;
 		return average_salary;
 	}
 
-	public void setAverage_salary(Integer average_salary) {
+	public void setAverage_salary(Float average_salary) {
+		
 		this.average_salary = average_salary;
 	}
 
-	public Integer impuestoCalc(){
+	public Float impuestoCalc(){
 		// calculamos el monto de impuestos de cada empleado.
-		// y retornamos el salario neto
+		// y retornamos el salary neto
 		return this.net_salary;
 	}
 
-	public void getSalario(Integer salario){
-		this.salario = salario;
+	public void setSalary(Float salary){
+		this.salary = salary;
 	}
 	
-	public Integer getSalario(){
-		return salario;
+	public Float getSalary(){
+		return salary;
 	}
 
 	public void setProfession(String profession){
