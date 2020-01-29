@@ -23,7 +23,7 @@ public class Team{
 	
 	private String division;
 	private String name;
-	private Integer salary_prom;
+	private Double salary_average;
 	
 	@OneToMany(mappedBy="team",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Player> players;
@@ -37,6 +37,19 @@ public class Team{
 	private Dt dt;
 		
 	
+	public Double getSalaryAv() {
+		Double suma = 0.0;
+		Double nEmployee = 0.0;
+		for (Player player : players) {
+			suma += player.getSalary();
+			nEmployee ++;
+		}
+		suma += dt.getSalary();
+		nEmployee++;
+		salary_average = suma/nEmployee ;
+		return salary_average;
+	}
+	
 	public void setDt(Dt dt) {
 		dt.setTeam(this);
 		this.dt = dt;
@@ -44,11 +57,15 @@ public class Team{
 	
 	public String getDt() {
 		if (dt != null) {
-			return dt.getFirstName();
+			return dt.getFirstName() + dt.getLastName();
 		}else {
 			return "no name";
 		}
 		
+	}
+	public Dt getDtObj() {
+		
+		return this.dt;
 	}
 	
 	public String getTournament() {
@@ -68,7 +85,7 @@ public class Team{
 		players = new ArrayList<>();
 	}
 	
-	private void addPlayer(Player player) {
+	public void addPlayer(Player player) {
 		if (!players.contains(player)) {
 			players.add(player);
 			player.setTeam(this);
@@ -108,14 +125,6 @@ public class Team{
 	
 	public Long getId(){
 		return id;
-	}
-
-	public Integer getSalary_prom() {
-		return salary_prom;
-	}
-
-	public void setSalary_prom(Integer salary_prom) {
-		this.salary_prom = salary_prom;
 	}
 
 	

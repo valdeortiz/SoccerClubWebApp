@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.domain.Tournament;
 import com.webapp.democlub.service.TournamentService;
 
@@ -24,21 +24,27 @@ public class TournamentController {
         Tournament tournament = tournamentService.findById(id);
         return tournament;
     }
+    // retorna una lista con los equipos de la division(type)
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
+    public List<Team> findByType(@PathVariable("type") String type) {
+        List<Team> teams = tournamentService.findByType(type);
+        return teams;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Tournament> list() {
         return tournamentService.findAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void add(@RequestBody Tournament tournament) {
-    	tournamentService.save(tournament);
-    }
+//    @RequestMapping(method = RequestMethod.POST)
+//    public void add(@RequestBody Tournament tournament) {
+//    	tournamentService.save(tournament);
+//    }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) {
-    	tournamentService.delete(id);
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//    public void delete(@PathVariable("id") Long id) {
+//    	tournamentService.delete(id);
+//    }
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public void deleteAll() {

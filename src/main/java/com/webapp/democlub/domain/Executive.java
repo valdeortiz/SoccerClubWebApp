@@ -15,6 +15,7 @@ public class Executive extends Employee{
 	@Override
 	public void setProfession(String profession) {
 		// TODO Auto-generated method stub
+		profession = "Directivo";
 		super.setProfession(profession);
 	}
 	

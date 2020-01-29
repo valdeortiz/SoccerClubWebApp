@@ -20,7 +20,11 @@ public class EmployeeService {
 		Employee employee = employeeRepository.findById(id).orElse(null);
 		return employee;
 	}
-
+	public Float promedio(Long id) {
+		Employee employee = findById(id);
+		return employee != null ? employee.getAverage_salary() : (float)0.0 ;
+		
+	}
 	
 	public List<Employee> findAll() {
 		List<Employee> employees = new ArrayList<>();

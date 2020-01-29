@@ -23,6 +23,11 @@ public class EmployeeController {
         Employee employee = employeeService.findById(id);
         return employee;
     }
+    @RequestMapping(value = "/prom/{id}", method = RequestMethod.GET)
+    public Float average(@PathVariable("id") Long id) {
+        Float average = employeeService.promedio(id);
+        return average;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Employee> list() {

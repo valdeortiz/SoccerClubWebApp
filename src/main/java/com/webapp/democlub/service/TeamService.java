@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webapp.democlub.domain.Player;
 import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.domain.Tournament;
+import com.webapp.democlub.exception.InscripcionException;
 import com.webapp.democlub.repository.TeamRepository;
 import com.webapp.democlub.repository.TournamentRepository;
 
@@ -25,6 +27,21 @@ public class TeamService {
 		Team team = teamRepository.findById(id).orElse(null);
 		return team;
 	}
+	public List<Team> findByDivision(String div) {
+		List<Team> team = teamRepository.findByDivision(div);
+		return team;
+	}
+	public List<String> average(String name) {
+		Team team = teamRepository.findByName(name);
+		List<Player> playes = team.getPlayers();
+		List<String> resul = new ArrayList<>();
+		resul.add("Equipo: " + team.getName());
+		for (Player player : playes) {
+			resul.add(player.getFirstName() +" "+ player.getLastName()+ ": " + player.getAverage_salary());
+		}
+		resul.add(team.getDtObj().getFirstName() + " " + team.getDtObj().getLastName() + ": " + team.getDtObj().getAverage_salary());
+		return resul;
+	}
 
 	
 	public List<Team> findAll() {
@@ -36,7 +53,7 @@ public class TeamService {
 		return teams;
 	}
 	
-	public void save(Team team) {
+	public void save(Team team)throws InscripcionException {
 		//int cont = 0;
 //		for (Player player : this.getPlayers() ) {
 //			if(player.getId() == dt.getId() ) {
@@ -50,8 +67,16 @@ public class TeamService {
 //			inscripcionException.setContacto("contacto@gmail.com");
 //		}
 		Tournament tourn = tournamentRepository.findByName(team.getTournament());
-		if (tourn != null) {
+		Team equipo = teamRepository.findByName(team.getName());
+		if (tourn == null || equipo != null) {
+			InscripcionException inscripcionException =  new InscripcionException(
+					"Asegurese de que escribio correctamente el TORNEO: ");
+			inscripcionException.setContacto("contacto@gmail.com");
+			System.err.println("tourn o equipo es null");
+			
+		}else {
 			tourn.addTeam(team);
+			team.setTournament(tourn);
 			teamRepository.save(team);
 		}
 		

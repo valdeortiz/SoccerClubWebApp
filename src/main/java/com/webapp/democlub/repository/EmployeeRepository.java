@@ -7,4 +7,6 @@ import com.webapp.democlub.domain.Employee;
 
 @RepositoryRestResource(collectionResourceRel = "employee", path = "employee")
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+	//List<Employee> findByTeam(Team team);
+	
 }

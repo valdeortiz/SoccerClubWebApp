@@ -3,7 +3,6 @@ package com.webapp.democlub.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +19,7 @@ public class Tournament {
 	private String name;
 	private String type;
 	
-	@OneToMany(mappedBy="tournament", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="tournament")
 	private List<Team> teams;
 	
 	public Tournament() {

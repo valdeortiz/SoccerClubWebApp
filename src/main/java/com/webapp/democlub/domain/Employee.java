@@ -17,16 +17,15 @@ public class Employee extends Person{
 	private Float net_salary;
 	private Float average_salary;
 	
-
 	public Float getAverage_salary() {
 		average_salary = salary / 12;
 		return average_salary;
 	}
 
-	public void setAverage_salary(Float average_salary) {
-		
-		this.average_salary = average_salary;
-	}
+//	public void setAverage_salary(Float average_salary) {
+//		
+//		this.average_salary = average_salary;
+//	}
 
 	public Float impuestoCalc(){
 		// calculamos el monto de impuestos de cada empleado.

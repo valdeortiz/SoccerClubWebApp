@@ -8,5 +8,7 @@ import com.webapp.democlub.domain.Tournament;
 @RepositoryRestResource(collectionResourceRel = "tournament", path = "tournament")
 public interface TournamentRepository extends PagingAndSortingRepository<Tournament, Long> {
 	public Tournament findByName(String name);
+	public Tournament findByType(String type);
+	
 	
 }

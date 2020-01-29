@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.domain.Tournament;
 import com.webapp.democlub.repository.TournamentRepository;
 
@@ -20,6 +21,10 @@ public class TournamentService {
 		Tournament tournament = tournamentRepository.findById(id).orElse(null);
 		return tournament;
 	}
+	public List<Team> findByType(String type) {
+		List<Team> teams = tournamentRepository.findByType(type).getTeams();
+		return teams;
+	}
 
 	
 	public List<Tournament> findAll() {
@@ -31,14 +36,14 @@ public class TournamentService {
 		return tournaments;
 	}
 	
-	public void save(Tournament tournament) {
-				
-		tournamentRepository.save(tournament);
-	}
+//	public void save(Tournament tournament) {
+//				
+//		tournamentRepository.save(tournament);
+//	}
 
-	public void delete(Long id) {
-		tournamentRepository.deleteById(id);
-	}
+//	public void delete(Long id) {
+//		tournamentRepository.deleteById(id);
+//	}
 
 	public void deleteAll() {
 		tournamentRepository.deleteAll();
