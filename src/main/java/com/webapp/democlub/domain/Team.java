@@ -51,7 +51,7 @@ public class Team{
 	}
 	
 	public void setDt(Dt dt) {
-		dt.setTeam(this);
+		//dt.setTeam(this);
 		this.dt = dt;
 	}
 	
@@ -59,11 +59,11 @@ public class Team{
 		if (dt != null) {
 			return dt.getFirstName() + dt.getLastName();
 		}else {
-			return "no name";
+			return "no dt";
 		}
 		
 	}
-	public Dt getDtObj() {
+	public Dt DtObj() {
 		
 		return this.dt;
 	}

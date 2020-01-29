@@ -7,4 +7,5 @@ import com.webapp.democlub.domain.Dt;
 
 @RepositoryRestResource(collectionResourceRel = "dt", path = "dt")
 public interface DtRepository extends PagingAndSortingRepository<Dt, Long> {
+	
 }

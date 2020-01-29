@@ -22,6 +22,7 @@ public class TeamService {
 	
 	@Autowired
 	private TournamentRepository tournamentRepository;
+	
 		
 	public Team findById(Long id) {
 		Team team = teamRepository.findById(id).orElse(null);
@@ -35,11 +36,12 @@ public class TeamService {
 		Team team = teamRepository.findByName(name);
 		List<Player> playes = team.getPlayers();
 		List<String> resul = new ArrayList<>();
-		resul.add("Equipo: " + team.getName());
+		resul.add("Nombre : salario promedio");
+		resul.add("Equipo: " + team.getName() + ": " + team.getSalaryAv());
 		for (Player player : playes) {
-			resul.add(player.getFirstName() +" "+ player.getLastName()+ ": " + player.getAverage_salary());
+			resul.add(player.getFirstName() + " " + player.getLastName() + ": " + player.getAverage_salary());
 		}
-		resul.add(team.getDtObj().getFirstName() + " " + team.getDtObj().getLastName() + ": " + team.getDtObj().getAverage_salary());
+		resul.add(team.DtObj().getFirstName() + " " + team.DtObj().getLastName() + ": " + team.DtObj().getAverage_salary());
 		return resul;
 	}
 
@@ -68,9 +70,10 @@ public class TeamService {
 //		}
 		Tournament tourn = tournamentRepository.findByName(team.getTournament());
 		Team equipo = teamRepository.findByName(team.getName());
+				
 		if (tourn == null || equipo != null) {
 			InscripcionException inscripcionException =  new InscripcionException(
-					"Asegurese de que escribio correctamente el TORNEO: ");
+					"Asegurese de que escribio correctamente el TORNEO o que el nombre del equipo no existe: ");
 			inscripcionException.setContacto("contacto@gmail.com");
 			System.err.println("tourn o equipo es null");
 			

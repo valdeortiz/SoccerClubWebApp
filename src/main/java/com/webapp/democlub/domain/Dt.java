@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 
 @Entity
-public class Dt extends Employee{
+public class Dt extends Player{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +21,7 @@ public class Dt extends Employee{
 	private Team team;
 	//private Integer trophies;
 	
+	
 	public String getTeam() {
 		if (team != null) {
 			return team.getName();
@@ -28,6 +29,7 @@ public class Dt extends Employee{
 			return "no team";
 		}
 	}
+	
 	public void setTeam(Team team) {
 		this.team = team;
 	}
