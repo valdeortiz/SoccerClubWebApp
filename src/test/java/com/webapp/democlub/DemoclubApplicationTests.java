@@ -1,11 +1,19 @@
 package com.webapp.democlub;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.webapp.democlub.domain.Association;
+import com.webapp.democlub.domain.Employee;
+import com.webapp.democlub.domain.Organization;
+import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.domain.Tournament;
+import com.webapp.democlub.repository.AssociationRepository;
+import com.webapp.democlub.repository.OrganizationRepository;
 import com.webapp.democlub.repository.TournamentRepository;
 
 @SpringBootTest
@@ -13,6 +21,12 @@ class DemoclubApplicationTests {
 	
 	@Autowired
 	private TournamentRepository repo;
+	
+	@Autowired
+	private OrganizationRepository orgRepo;
+	
+	@Autowired
+	private AssociationRepository asrepo;
 //	@Test
 //	void contextLoads() {
 //		Dt dt = new Dt();
@@ -39,9 +53,27 @@ class DemoclubApplicationTests {
 	@Test
 	void crearTorneos() {
 		
+		Team team = new Team();
+		team.setName("sin team");
+		
 		Association asociacion = new Association();
-		asociacion.setName("Aso de empleados");
+		asociacion.setName("aso de empleados");
 		asociacion.setType("empleados");
+		List<Employee> members = new ArrayList<>();
+		asociacion.setMembers(members);
+		asrepo.save(asociacion);
+		
+		Organization ong = new Organization();
+		ong.setName("ong Principal");
+		//ong.setType("ong");
+		ong.setYearOld(7);
+		orgRepo.save(ong);
+		
+		Organization ong2 = new Organization();
+		ong2.setName("ong secundaria");
+		//ong2.setType("ong2");
+		ong2.setYearOld(3);
+		orgRepo.save(ong2);
 		
 		Tournament apertura = new Tournament();
 		apertura.setName("nacionales de primera");

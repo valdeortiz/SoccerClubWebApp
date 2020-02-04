@@ -25,9 +25,9 @@ public class PlayerService {
 		Player player = playerRepository.findById(id).orElse(null);
 		return player;
 	}
-	public Float promedio(Long id) {
+	public Double promedio(Long id) {
 		Player player = findById(id);
-		return player != null ? player.getAverage_salary() : (float)0.0 ;
+		return player != null ? player.getAverage_salary() : 0.0 ;
 		
 	}
 

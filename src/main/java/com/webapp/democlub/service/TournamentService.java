@@ -25,7 +25,14 @@ public class TournamentService {
 		List<Team> teams = tournamentRepository.findByType(type).getTeams();
 		return teams;
 	}
-
+	public List<String> average(String name) {
+		List<Team> teams = tournamentRepository.findByName(name).getTeams();
+		List<String> ave = new ArrayList<>();
+		for (Team team : teams) {
+			ave.add(team.getName() + ": " + team.getSalary_average());
+		}
+		return ave;
+	}
 	
 	public List<Tournament> findAll() {
 		List<Tournament> tournaments = new ArrayList<>();

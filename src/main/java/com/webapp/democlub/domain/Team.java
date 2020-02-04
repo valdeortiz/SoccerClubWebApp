@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,8 +25,9 @@ public class Team{
 	
 	private String division;
 	private String name;
+	private Double annual_salary;
 	private Double salary_average;
-	
+			
 	@OneToMany(mappedBy="team",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Player> players;
 	
@@ -34,30 +37,128 @@ public class Team{
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="dt_id")
-	private Dt dt;
-		
+	private Dt dt; // quitar cascada para no eliminar dt al eliminar team
 	
-	public Double getSalaryAv() {
+	@ElementCollection
+	private List<Employee> empleados = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinColumn(name="org_id")
+	private List<Organization> orgs = new ArrayList<>();
+	
+	
+	public boolean isPlayer(Player dt) {
+		return players.contains(dt);
+	}
+	
+	public void salaryDiscount(Double discount) {
+		if (annual_salary != null) {
+			this.annual_salary -= discount; 
+		}else {
+			this.annual_salary = salaryCalc();
+			this.annual_salary -= discount;
+		}
+		
+	}
+	public List<Organization> orgObj(){
+		return orgs;
+	}
+	public List<String> getOrgs() {
+		List<String> resul = new ArrayList<>();
+		for (Organization organization : orgs) {
+			resul.add(organization.getName());
+		}
+		return resul;
+	}
+
+	public void setOrgs(List<Organization> orgs) {
+		this.orgs = orgs;
+	}
+
+	public void addEmployee(Employee employee) {
+		if (!empleados.contains(employee)) {
+			empleados.add(employee);
+		}else {
+			System.err.println("Ya existe el empleado");
+		}
+	}
+		
+	public List<Employee> getEmpleados() {
+		return empleados;
+	}
+
+
+	public void setEmpleados(List<Employee> empleados) {
+		for (Employee employee : empleados) {
+			addEmployee(employee);
+		}
+		//this.empleados = empleados;
+	}
+	public void setSalary_average(Double salary_average) {
+		if (salary_average != null) {
+			this.salary_average = salary_average;
+		}else {
+			this.salary_average = calcAv();
+		}
+		
+	}
+	
+	public Double getAnnual_salary() {
+		if (annual_salary == null) {
+			return salaryCalc();
+		}else {
+			return annual_salary;
+		}
+		
+	}
+
+	public void setAnnual_salary(Double annual_salary) {
+		if (annual_salary != null) {
+			this.annual_salary = annual_salary;
+		}else {
+			this.annual_salary = salaryCalc();
+		}
+		
+	}
+	public Double salaryCalc() {
 		Double suma = 0.0;
-		Double nEmployee = 0.0;
 		for (Player player : players) {
 			suma += player.getSalary();
-			nEmployee ++;
 		}
-		suma += dt.getSalary();
-		nEmployee++;
+		for (Employee employee : empleados) {
+			suma += employee.getSalary();
+		}
+		if (dt != null) {
+			suma += dt.getSalary();
+		}
+		
+		return suma;
+	}
+	
+	public Double calcAv() {
+		Double suma = salaryCalc();
+		Double nEmployee = (double)empleados.size() + (double)players.size() + 1;
 		salary_average = suma/nEmployee ;
 		return salary_average;
 	}
 	
+	public Double getSalary_average() {
+		if (salary_average == null) {
+			return calcAv();
+		}else {
+			return salary_average;
+		}
+		
+	}
+	
 	public void setDt(Dt dt) {
-		//dt.setTeam(this);
+		dt.setTeam(this);
 		this.dt = dt;
 	}
 	
 	public String getDt() {
 		if (dt != null) {
-			return dt.getFirstName() + dt.getLastName();
+			return dt.getFirstName()+ " " + dt.getLastName();
 		}else {
 			return "no dt";
 		}

@@ -25,8 +25,8 @@ public class PlayerController {
         return player;
     }
     @RequestMapping(value = "/prom/{id}", method = RequestMethod.GET)
-    public Float average(@PathVariable("id") Long id) {
-        Float average = playerService.promedio(id);
+    public Double average(@PathVariable("id") Long id) {
+        Double average = playerService.promedio(id);
         return average;
     }
 

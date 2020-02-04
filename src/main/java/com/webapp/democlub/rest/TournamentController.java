@@ -30,6 +30,11 @@ public class TournamentController {
         List<Team> teams = tournamentService.findByType(type);
         return teams;
     }
+    @RequestMapping(value = "/av/{name}", method = RequestMethod.GET)
+    public List<String> average(@PathVariable("name") String name) {
+        List<String> av = tournamentService.average(name);
+        return av;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Tournament> list() {

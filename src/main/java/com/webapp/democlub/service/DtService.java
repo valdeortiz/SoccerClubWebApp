@@ -38,18 +38,24 @@ public class DtService {
 	}
 	
 	public void save(Dt dt) throws InscripcionException{
+		
 		Team team = teamRepo.findByName(dt.getTeam());
 		if (team != null) {
+//			if (team.isPlayer(dt)) {
+//				
+//			}
 			dt.setTeam(team);
 			team.setDt(dt);
-			dtRepository.save(dt);
+			
 		}else {
 			
+			dt.setTeam(null);
 			//lanzar excepcions
 			// team = sin equipo
-			System.err.println("No se pudo guardar player: null team");
+			System.err.println("No se pudo guardar dt: null team");
 		}
 		
+		dtRepository.save(dt);
 		
 	}
 

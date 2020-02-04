@@ -2,6 +2,7 @@
 
 [![Java versions](https://img.shields.io/badge/JAVA-v8-blue)](https://www.java.com/es/download/) [![version](https://img.shields.io/badge/Version-v1.0-blue)](https://github.com/valdeortiz/SoccerClubWebApp)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a460577315c6434a96a79218ef4858fd)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=valdeortiz/SoccerClubWebApp&amp;utm_campaign=Badge_Grade)
 *** 
 ## Descarga de Repositorio :arrow_backward:
 

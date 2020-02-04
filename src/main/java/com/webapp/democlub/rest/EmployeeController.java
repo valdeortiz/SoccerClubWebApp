@@ -24,8 +24,8 @@ public class EmployeeController {
         return employee;
     }
     @RequestMapping(value = "/prom/{id}", method = RequestMethod.GET)
-    public Float average(@PathVariable("id") Long id) {
-        Float average = employeeService.promedio(id);
+    public Double average(@PathVariable("id") Long id) {
+        Double average = employeeService.promedio(id);
         return average;
     }
 

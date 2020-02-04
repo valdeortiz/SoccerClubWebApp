@@ -1,0 +1,61 @@
+
+
+###Controller se encarga de mapear y de los datos proporcionados atraves del uri/url
+**
+uri = url dinamicas- ej: detalle/{id}
+todos los parametros son de tipo string.
+para hacer "binding"(un parametro http asignar a una variable) se usa  @RequestParam
+ejemplo : /datalle?id=$  .. todos lo que va despues de $son los parametros llamados queryString
+**
+###@Service = Se encuentra la logica para nuestro controller
+En el service es mejor usar el interface porque asi al instanciar en un controller no importa la implementacion, entonces en un futuro podemos cambiar la implementacion 
+@RepositoryRestResource= Se encarga de de publicar el repositorio como servicio rest.
+
+#variantes de RequestMapping
+@GetMapping @PostMapping @PutMapping @DeleteMapping @PatchMapping
+obs:solo se usa a nivel de metodo
+--- Te ahorras especificar el metodo  como cuando utilizas RequestMapping---
+
+### @Entity es para mapear jpa ... cada entity es una tabla en la base de datos
+se puede usar @Table para dar un nombre especifico
+
+### Spring Data Jpa = Persistencia de datos.
+JPA = Mapea las clases con las tablas de la bd (atravez de ORM(Object Relational Map).
+Spring Data Jpa = Maneja el concepto de repository con el patron DAO.
+@ElementCollection() = La tabla en lista.
+@oneToMany = relacion uno-muchos --> fetch-> Lazy(default) para que no consulte siempre en la bd, priorisa memoria, casscade es para que la accion del padre tambien se ejecute en el hijo(en palabras simple desde una tabla se puede crea otra tabla del tipo contrario)
+@JoinColumns es el padre de la relacion(Y se guarda como la variable name como llave foranea).
+@oneToOne = relacion uno-uno.
+
+###PagingAndSortingRepository
+JpaRepository extiende de PagingAndSortingRepo y PagingASRepo extiende de Crudrepo
+-CrudRepo= Principalmente proporciona funciones CRUD ya implementados.
+-PagingAndSortingRepo= proporciona metodos para hacer paginacion y ordenacion de registros
+-JpaRepo= proporciona algunos Jpa relacionados con el metodo, tales como la limpiezade los contexto de persistencia y eliminar registro de un  lote.
+
+### @RestController = Es el controlador de tipo Rest. Donde se encuentra la logica de las peticiones http
+## @Autowired = procedimiento para inyectar una clase de servicio en un controlador
+Al ejecutar ek autowired spring  busca una implementacion de la interfaz  que esta en autowired. Busca en stackBean de java que son instancias singleton.
+
+
+
+*** DAO = Data Acces Object. Patron de diseño.
+*** Optional<> Envuelve a una clase.. Y sirve para evitar los null pointer excep.. El optional devulve el objeto en caso de que si se encontro el objeto
+orElse(arg)=Devuelve el objeto, y en caso de no encontrar el objeto se devuelve --arg-- 
+
+** Endpoint = son las urls para la ejecucion de algun metodo.
+
+*** @ElementContent para que la tabla sea una lista
+
+
+
+##### Spring Security
+
+Autenticacion: Acceso a los recursos.
+Autorizacion: Ver si el user tiene los permisos para consumir el recurso.
+- Se aplica a dos metodos: invocacion de metodos y a las peticiones http
+-* servelet filter son componentes(interceptors) ejecutados antes(pre-process) y despues (post-process) de la peticion web.
+http 403 -> Acceso denegado.
+cort cointainer de spring los singleton
+
+
