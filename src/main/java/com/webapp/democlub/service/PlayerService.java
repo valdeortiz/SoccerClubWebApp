@@ -41,17 +41,22 @@ public class PlayerService {
 		return players ;
 	}
 	
-	public void save(Player player) {
+	public Player save(Player player) {
 		Team team = teamRepo.findByName(player.getTeam());
 		if (team != null) {
 			player.setTeam(team);
 			team.addPlayer(player);
-			playerRepository.save(player);
 		}else {
 			//lanzar excepcions
 			// team = sin equipo
+			player.setTeam(null);
 			System.err.println("No se pudo guardar player: null team");
 		}
+		if (player.getSalary() != null && player.getFirstName() != null) {
+			return playerRepository.save(player);
+		}else
+			throw new RuntimeException("Salary y el nombre no deben ser nulos");
+		
 		
 	}
 

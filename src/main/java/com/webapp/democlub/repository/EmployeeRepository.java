@@ -9,4 +9,5 @@ import com.webapp.democlub.domain.Employee;
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 	//List<Employee> findByTeam(Team team);
 	
+	
 }

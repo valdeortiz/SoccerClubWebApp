@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 
 
 @Entity
-public class Dt extends Employee{
+public class Dt extends Player{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +28,10 @@ public class Dt extends Employee{
 			return "no team";
 		}
 	}
-	
+	public Team teamObj() {
+		return team;
+	}
+
 	public void setTeam(Team team) {
 		this.team = team;
 	}

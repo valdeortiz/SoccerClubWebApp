@@ -18,21 +18,40 @@ public class Tournament {
 	
 	private String name;
 	private String type;
+	private String winner;
 	
 	@OneToMany(mappedBy="tournament")
 	private List<Team> teams;
 	
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String winner) {
+		this.winner = winner;
+	}
+
 	public Tournament() {
 		teams = new ArrayList<>();
 	}
 	
-	public List<Team> getTeams() {
+	public List<String> getTeamsName() {
+		List<String> resul = new ArrayList<>();
+		for (Team team : teams) {
+			resul.add(team.getName());
+		}
+		return resul;
+	}
+	public List<Team> Teams() {
 		return teams;
 	}
 	public void addTeam(Team team) {
 		if (!teams.contains(team)) {
 			teams.add(team);
 			team.setTournament(this);
+			System.err.println("Se agrego el equipo");
+		}else {
+			System.err.println("Ya existe el equipo en el torneo ");
 		}
 	}
 

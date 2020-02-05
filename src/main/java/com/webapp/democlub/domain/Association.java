@@ -21,8 +21,12 @@ public class Association{
 	@OneToMany(mappedBy = "association")
 	List<Employee> members = new ArrayList<>();
 	
-	public List<Employee> getMembers() {
-		return members;
+	public List<String> getMembers() {
+		List<String> resul = new ArrayList<>();
+		for (Employee employee : members) {
+			resul.add(employee.getFirstName()+ " " + employee.getLastName());
+		}
+ 		return resul;
 	}
 	public void addEmployee(Employee employee) {
 		if (!members.contains(employee)) {

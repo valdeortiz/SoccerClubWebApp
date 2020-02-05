@@ -1,6 +1,5 @@
 package com.webapp.democlub.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.sun.istack.NotNull;
 
 @Entity
 public class Employee extends Person{
@@ -17,16 +18,38 @@ public class Employee extends Person{
 	private Long id;
 	
 	private String profession;
+	
+	@NotNull
 	private Double salary;
 	private Double net_salary;
+	
 	private Double average_salary;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "association_id")
 	private Association association;
-	
 	private String teamName;
-		
+	
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "team_id")
+//	private Team team;
+//	
+//	public String getTeam() {
+//		if (team != null) {
+//			return team.getName();
+//		}else {
+//			return "no Team";
+//		}
+//	}
+//	
+//	public Team TeamObj() {
+//		return team;
+//	}
+//
+//	public void setTeam(Team team) {
+//		this.team = team;
+//	}
+	
 	public String getTeam() {
 		return teamName;
 	}

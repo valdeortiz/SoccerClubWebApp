@@ -32,7 +32,4 @@ public class Executive extends Employee{
 		this.id = id;
 	}
 	
-	
-		
-	
 }

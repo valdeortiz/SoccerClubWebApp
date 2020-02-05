@@ -29,8 +29,12 @@ public class PersonService {
 		return persons ;
 	}
 	
-	public void save(Person person) {
-		personRepository.save(person);
+	public Person save(Person person) {
+		if (person.getFirstName() != null && person.getLastName() != null) {
+			return personRepository.save(person);
+		}else
+			throw new RuntimeException("EL nombre no debe ser null");
+		
 	}
 
 	public void delete(Long id) {

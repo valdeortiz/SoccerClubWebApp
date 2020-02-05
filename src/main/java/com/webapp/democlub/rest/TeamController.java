@@ -1,8 +1,13 @@
 package com.webapp.democlub.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +27,22 @@ public class TeamController {
 	private TeamService teamService;
 	
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Team greetings(@PathVariable("id") Long id) {
-        Team team = teamService.findById(id);
-        return team;
+    public ResponseEntity<?> greetings(@PathVariable("id") Long id) {
+    	Team team = null;
+    	Map<String, Object> response = new HashMap<>();
+    	try {
+    		team = teamService.findById(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la conexion a la base de datos");
+			response.put("error",e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+         
+        if (team == null) {
+        	response.put("mensaje", "El id no existe en la base de datos");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+        return new ResponseEntity<Team>(team, HttpStatus.OK);
     }
     @RequestMapping(value = "/av/{name}", method = RequestMethod.GET)
     public List<String> average(@PathVariable("name") String name ) {
@@ -44,22 +62,19 @@ public class TeamController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void add(@RequestBody Team team) throws InscripcionException {
-    	//try catch de inscripcion del dt
-//    	try {
-//			teamService.save(team);
-//		} catch (InscripcionException e) {
-//			String email = e.getContacto();
-//			System.out.println("Ocurrió un error al inscribir las empresas: " + e.getMessage());
-//		}
+    public ResponseEntity<?> add(@RequestBody Team team) throws InscripcionException {
+    	Team newTeam = null;
+    	Map<String, Object> response = new HashMap<>();
     	try {
-    		teamService.save(team);
-		} catch (InscripcionException e) {
-			String email = e.getContacto();
-			System.err.println(email);
-			System.out.println("Ocurrió un error al inscribir los TEAM: " + e.getMessage());
+    		newTeam = teamService.save(team);
+		} catch (Exception e) {
+			response.put("mensaje", "Error al insertar el team a la base de datos");
+			response.put("error",e.getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-    	
+        response.put("mensaje", "El team ha sido creado con exito");
+        response.put("team", newTeam);
+    	return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

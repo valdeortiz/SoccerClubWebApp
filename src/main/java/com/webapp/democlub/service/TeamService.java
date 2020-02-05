@@ -22,7 +22,7 @@ public class TeamService {
 
 	@Autowired
 	private TeamRepository teamRepository;
-	
+		
 	@Autowired
 	private OrganizationRepository orgRepository;
 	
@@ -41,7 +41,7 @@ public class TeamService {
 	public List<String> average(String name) {
 		Team team = teamRepository.findByName(name);
 		List<Player> playes = team.getPlayers();
-		List<Employee> employs = team.getEmpleados();
+		List<Employee> employs = team.Empleados();
 		List<String> resul = new ArrayList<>();
 		resul.add("---> Equipo " + team.getName() + ": " + team.getSalary_average());
 		resul.add("** Nombre ** : ** salario promedio **");
@@ -66,7 +66,7 @@ public class TeamService {
 		return teams;
 	}
 	
-	public void save(Team team)throws InscripcionException {
+	public Team save(Team team)throws InscripcionException {
 		//int cont = 0;
 //		for (Player player : this.getPlayers() ) {
 //			if(player.getId() == dt.getId() ) {
@@ -88,8 +88,14 @@ public class TeamService {
 					"Asegurese de que escribio correctamente el TORNEO o que el nombre del equipo no existe: ");
 			inscripcionException.setContacto("contacto@gmail.com");
 			System.err.println("tourn o equipo es null");
-			
+			throw inscripcionException;
 		}else {
+			if (team.DtObj() != null) {
+				throw new RuntimeException("Para poder registrar un dt, haga post a /dt. con el nombre del equipo");
+			}
+			if (tourn.getType() == "internacional") {
+				throw new RuntimeException("No se puede inscribir de esta manera a una competencia internacional, realice un put a tournament");
+			}
 			List<Team> teamsav = findAll();
 			Double av = 0.0;
 			for (Team team2 : teamsav) {
@@ -100,6 +106,7 @@ public class TeamService {
 				Double impuesto = impLujo(team.getSalary_average(), av);
 				if (impuesto == 0.0) {
 					System.err.println("EL salario es mas alto que 2xProm " + team.getAnnual_salary());
+					throw new RuntimeException("EL salario es mas alto que 2xProm " + team.getAnnual_salary());
 					//lanzar la exception
 				}else {
 					List<Organization> ongs = team.orgObj();
@@ -127,8 +134,9 @@ public class TeamService {
 			}
 			tourn.addTeam(team);
 			team.setTournament(tourn);
-			teamRepository.save(team);
+			return teamRepository.save(team);
 		}
+			
 		
 	}
 	

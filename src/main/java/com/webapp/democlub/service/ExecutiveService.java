@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webapp.democlub.domain.Executive;
+import com.webapp.democlub.domain.Team;
 import com.webapp.democlub.repository.ExecutiveRepository;
+import com.webapp.democlub.repository.TeamRepository;
 
 /*
 * Creamos las funciones para nuestro controlador utilizando crud para la manipulacion de datos
@@ -25,6 +27,8 @@ public class ExecutiveService {
 
 	@Autowired
 	private ExecutiveRepository executiveRepository;
+	@Autowired
+	private TeamRepository teamRepository;
 	
 	public List<Executive> findAll(){
 		List<Executive> executives = new ArrayList<>();
@@ -42,7 +46,26 @@ public class ExecutiveService {
 	}
 	
 	public void save(Executive executive) {
+		Team team = teamRepository.findByName(executive.getTeam());
+		if (team != null) {
+			team.addEmployee(executive);
+			executive.setTeamName(team.getName());
+		}else {
+			System.err.println("El equipo no existe o es nulo");
+		}
 		executiveRepository.save(executive);
+	}
+	public Executive savePut(Executive executive) {
+		Team team = teamRepository.findByName(executive.getTeam());
+		Executive exe = executiveRepository.findById(executive.getId()).orElse(null);
+		if (team != null && exe != null) {
+			team.addEmployee(executive);
+			exe.setTeamName(team.getName());
+		}else {
+			System.err.println("El equipo no existe o es nulo");
+			throw new RuntimeException("No existe el equipo o el id del directivo");
+		}
+		return executiveRepository.save(exe);
 	}
 	
 	public void delete(Long id) {

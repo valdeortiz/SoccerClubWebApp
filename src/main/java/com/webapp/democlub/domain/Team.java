@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,10 +25,11 @@ public class Team{
 	private Long id;
 	
 	private String division;
+	@Column(nullable = false, unique = true)
 	private String name;
 	private Double annual_salary;
 	private Double salary_average;
-			
+	private Integer tournamentPosicion;
 	@OneToMany(mappedBy="team",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Player> players;
 	
@@ -35,9 +37,10 @@ public class Team{
 	@JoinColumn(name = "tournament_id")
 	private Tournament tournament;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="dt_id")
 	private Dt dt; // quitar cascada para no eliminar dt al eliminar team
+	// guardar en la lista de employee asi no creamos otra columna 
 	
 	@ElementCollection
 	private List<Employee> empleados = new ArrayList<>();
@@ -46,11 +49,28 @@ public class Team{
 	@JoinColumn(name="org_id")
 	private List<Organization> orgs = new ArrayList<>();
 	
+	// **************************************************************************
+	
+	public void setDt(Dt dt) {
+		//dt.setTeam(this);
+		
+		players.remove(dt);
+		
+		this.dt = dt;
+	}
 	
 	public boolean isPlayer(Player dt) {
 		return players.contains(dt);
 	}
 	
+	public Integer getTournamentPosicion() {
+		return tournamentPosicion;
+	}
+
+	public void setTournamentPosicion(Integer tournamentPosicion) {
+		this.tournamentPosicion = tournamentPosicion;
+	}
+
 	public void salaryDiscount(Double discount) {
 		if (annual_salary != null) {
 			this.annual_salary -= discount; 
@@ -82,17 +102,22 @@ public class Team{
 			System.err.println("Ya existe el empleado");
 		}
 	}
-		
-	public List<Employee> getEmpleados() {
+	public List<String> getEmpleados() {
+		List<String> resul = new ArrayList<>();
+		for (Employee employee : empleados) {
+			resul.add(employee.getFirstName() + " " + employee.getLastName() + " - " + employee.getProfession());
+		}
+		return resul;
+	}
+	
+	public List<Employee> Empleados() {
 		return empleados;
 	}
-
 
 	public void setEmpleados(List<Employee> empleados) {
 		for (Employee employee : empleados) {
 			addEmployee(employee);
 		}
-		//this.empleados = empleados;
 	}
 	public void setSalary_average(Double salary_average) {
 		if (salary_average != null) {
@@ -131,7 +156,6 @@ public class Team{
 		if (dt != null) {
 			suma += dt.getSalary();
 		}
-		
 		return suma;
 	}
 	
@@ -150,12 +174,7 @@ public class Team{
 		}
 		
 	}
-	
-	public void setDt(Dt dt) {
-		dt.setTeam(this);
-		this.dt = dt;
-	}
-	
+		
 	public String getDt() {
 		if (dt != null) {
 			return dt.getFirstName()+ " " + dt.getLastName();
@@ -177,7 +196,10 @@ public class Team{
 		}
 		
 	}
-
+	public Tournament tournamentObj() {
+		return this.tournament;
+	}
+	
 	public void setTournament(Tournament tournament) {
 		this.tournament = tournament;
 	}

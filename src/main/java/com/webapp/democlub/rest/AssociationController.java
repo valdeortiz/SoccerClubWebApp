@@ -27,6 +27,11 @@ public class AssociationController {
 		
 	}
 	
+	@RequestMapping(value = "/ins/{employeeID}/{association}", method = RequestMethod.PUT)
+    public void inscripcion(@PathVariable("employeeID") Long employee, @PathVariable("association") String association) {
+    	associationService.insAssociation(employee, association);
+	}
+	
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Association greetings(@PathVariable("id") Long id) {
         Association association = associationService.findById(id);

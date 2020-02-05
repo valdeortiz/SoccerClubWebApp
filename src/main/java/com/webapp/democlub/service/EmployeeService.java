@@ -45,18 +45,27 @@ public class EmployeeService {
 		return employees ;
 	}
 	
-	public void save(Employee employee) {
+	public Employee save(Employee employee) {
 		Association aso = asoRepo.findByName(employee.getAssociation());
 		Team team = teamRepo.findByName(employee.getTeam());
-		if (aso != null && team != null) {
-			team.addEmployee(employee);
-			employee.setTeamName(team.getName());
+		if (aso != null) {
 			aso.addEmployee(employee);
 			employee.setAssociation(aso);
 		}else {
-			System.err.println("No existe asociacion o team ");
+			System.err.println("No existe asociacion ");
 		}
-		employeeRepository.save(employee);
+		if (team != null) {
+			team.addEmployee(employee);
+			employee.setTeamName(team.getName());
+		}else {
+			System.err.println("Team no existe");
+		}
+		if (employee.getSalary() != null || employee.getLastName() != null) {
+			return employeeRepository.save(employee);
+		}else {
+			throw new RuntimeException("Salary y el nombre no puede ser null");
+		}
+		
 	}
 
 	public void delete(Long id) {
